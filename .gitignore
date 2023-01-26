@@ -1,0 +1,9 @@
+/build
+
+**.s
+**.o
+**.out
+**.cfg
+
+/.vscode
+/.ignore

@@ -1,0 +1,174 @@
+#!/bin/bash
+
+#
+# configure script
+# options:
+#   --64 ) compile for 64 bit
+#   --32 ) compile for 32 bit
+#   --prefix=<prefix> ) install directory
+#   --compiler=<compielr> ) set compiler
+#   --bash ) enables bash colloured output
+#
+
+set -e
+
+if [[ "$(id -u)" == 0 ]]
+then
+	printf "[ERROR] Running as root is not allowed\n"
+	printf "[ERROR] Aborting\n"
+	exit 1
+fi
+
+export PREFIX="/usr/local/"
+export CPP_FLAGS="\$(_GOLBAL_CPP_MARCH) --std=c++23 -fPIC -Wall -Wextra -s "
+
+LocateCompiler() {
+	if [[ $CPP_COMPILER != "" ]]
+	then
+		if [[ ! -f $CPP_COMPILER ]]
+			then
+			printf "[ERROR] Compiler not found\n"
+			printf "[ERROR] Aborting\n"
+			exit 1
+		fi
+	else
+		if [[ -f "/usr/bin/c++" ]]
+		then
+			export CPP_COMPILER="/usr/bin/c++"
+
+		elif [[ -f "/usr/local/bin/c++" ]]
+		then
+			export CPP_COMPILER="/usr/local/bin/c++"
+
+		elif [[ -f "/usr/bin/g++-12" ]] # prefer lates compiler if c++ not found
+		then
+			export CPP_COMPILER="/usr/bin/g++-12"
+
+		elif [[ -f "/usr/bin/g++-11" ]]
+		then
+			export CPP_COMPILER="/usr/bin/g++-11"
+
+		elif [[ -f "/usr/bin/g++" ]] # cant find anything defaulting to /usr/bin/g++
+		then
+			export CPP_COMPILER="/usr/bin/g++"	
+
+		elif [[ -f "/usr/local/bin/g++" ]] # cant find anything defaulting to /usr/bin/g++
+		then
+			export CPP_COMPILER="/usr/local/bin/g++"
+
+		else
+			printf "[ERROR] Cannot find g++ compiler\n"
+			printf "[ERROR] Aborting\n"
+			exit 1
+		fi
+	fi
+}
+
+HandleArgs() {
+	for i in $@
+	do
+		case $i in 
+			--prefix=*)
+				export PREFIX="${i:9}"
+				if [[ $PREFIX == "" ]]
+				then
+					printf "[WARNING] Defaulting to '/usr/local' because nothing was provided\n"
+					printf "[WARNING] Ignoring\n"
+					printf "[WARNIGN] Bad arguement\n"
+					printf "\n"
+					export PREFIX="/usr/local"
+				elif [[ ! -d $PREFIX ]]
+				then
+					printf "[ERROR] Prefix not found\n"
+					printf "[ERROR] Aborting\n"
+					exit 1
+				fi
+			;;
+			--compiler=*)
+				export CPP_COMPILER="${i:11}"
+				if [[ $CPP_COMPILER == "" ]]
+				then
+					printf "[WARNING] Compiler not specified\n"
+					printf "[WARNING] Ignoring\n"
+					printf "[WARNIGN] Bad arguement\n"
+					printf "\n"
+				fi
+			;;
+			--version=*)
+				export VERSION="${i:10}"
+				if [[ $VERSION == "" ]]
+				then
+					printf "[WARNING] Version not specified\n"
+					printf "[WARNING] Ignoring\n"
+					printf "[WARNIGN] Bad arguement\n"
+					printf "\n"
+				fi
+			;;
+			--32)
+				if [[ $BITS != "" ]]
+				then
+					printf "[ERROR] 32/64 bit already specified\n"
+					printf "[ERROR] Aborting\n"
+					exit 1
+				else
+					export BITS="32"
+					export ARCH="i386"
+				fi
+			;;
+			--64)
+				if [[ $BITS != "" ]]
+				then
+					printf "[ERROR] 32/64 bit already specified\n"
+					printf "[ERROR] Aborting\n"
+					exit 1
+				else
+					export BITS="32"
+					export ARCH="amd64"
+				fi				
+			;;
+			--bash)
+				export CPP_FLAGS+="-D__USING_BASH__ "
+			;;
+			*)
+				printf "[ERROR] Command not found '$i'\n"
+				printf "[ERROR] Aborting\n"
+				exit 1
+			;;
+		esac
+	done
+
+	if [[ $BITS == "32" || $BITS == "64" ]]
+	then
+		export BITS="-m$BITS"
+	fi
+}
+
+GenCFGFile() {
+	> Makefile.cfg
+
+	printf "_CPP = $CPP_COMPILER\n" >> Makefile.cfg
+	printf "_GOLBAL_CPP_MARCH = $BITS\n" >> Makefile.cfg
+	printf "_GLOBAL_ARCH  = $ARCH\n" >> Makefile.cfg
+
+	if [[ $VERSION != "" ]]
+	then
+		printf "VERSION = $VERSION\n" >> Makefile.cfg
+		printf "_GLOBAL_CPP_FLAGS = $CPP_FLAGS -D__EMBER_VERSION__='\"\$(VERSION)\"'\n" >> Makefile.cfg
+	else
+		printf "_GLOBAL_CPP_FLAGS = $CPP_FLAGS\n" >> Makefile.cfg
+	fi
+	
+	printf "PREFIX = $PREFIX\n" >> Makefile.cfg
+	printf "_LIBS = libEmberLexer.so libEmberCompiler.so libEmberCore.so\n" >> Makefile.cfg
+	printf "_LIBS_FULL = build/libEmberLexer.so build/libEmberCompiler.so build/libEmberCore.so\n" >> Makefile.cfg
+	printf "_BINS = ember\n" >> Makefile.cfg
+	printf "_BINS_FULL = build/ember\n" >> Makefile.cfg
+}
+
+main() {
+	HandleArgs "$@"
+	LocateCompiler
+	GenCFGFile
+}
+
+main "$@"

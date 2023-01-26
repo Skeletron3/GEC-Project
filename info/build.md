@@ -1,0 +1,17 @@
+# Building from source
+
+To build from source first run `./configure [--OPTIONS]` this will create a directory called 'build' then run `make` to build
+
+To install use `make install` (May require sudo)
+
+To build a package use `make pkg.<file extension>`
+
+## Options for confifure
+
+| Option name | Description |
+| --- | ----------- |
+| `--64` | Compile for 64 bit |
+| `--32` | Compile for 32 bit |
+| `--prefix=<prefix>` | Install directory, defaults to `/usr/local` |
+| `--compiler` | Specify compiler, default to /usr/bin/c++ but will try to find others if not found |
+| `--bash` | Bash coloured output to Ember |

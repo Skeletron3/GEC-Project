@@ -1,0 +1,24 @@
+# Main target
+pkg.deb: all build/_PKG_DEB build/_PKG_DEB.deb
+# Setup file structure ready for making the debian
+build/_PKG_DEB: $(_LIBS_FULL) $(_BINS_FULL)
+# Make the standard bin , lib , DEBIAN directories required to make the package
+	mkdir -p build/_PKG_DEB
+	mkdir -p build/_PKG_DEB/bin
+	mkdir -p build/_PKG_DEB/lib
+	mkdir -p build/_PKG_DEB/DEBIAN
+# Create a control
+	> build/_PKG_DEB/DEBIAN/control
+# Setup control
+	printf "Package: ember-lang\n" >> build/_PKG_DEB/DEBIAN/control
+	printf "Version: $(VERSION)\n" >> build/_PKG_DEB/DEBIAN/control
+	printf "Architecture: $(_GLOBAL_ARCH)\n" >> build/_PKG_DEB/DEBIAN/control
+	printf "Maintainer: None\n" >> build/_PKG_DEB/DEBIAN/control
+	printf "Description: Simple programming language built in C++\n" >> build/_PKG_DEB/DEBIAN/control
+# Copying the files into their respective directories
+	for FILE in $(_LIBS); do cp build/$$FILE build/_PKG_DEB/lib/$$FILE; done
+	for FILE in $(_BINS); do cp build/$$FILE build/_PKG_DEB/bin/$$FILE; done
+
+# Build the debian
+build/_PKG_DEB.deb: build/_PKG_DEB
+	dpkg-deb --build --root-owner-group build/_PKG_DEB

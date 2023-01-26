@@ -1,0 +1,3 @@
+printf("Hello World\n"); // Prints 'Hello World' + a new line
+printf("Hello World\n"); // Added to show the optimsation
+return(0); // Required to exit
