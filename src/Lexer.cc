@@ -134,12 +134,12 @@ void EMBERLANG::Exit(int code,string details1){
 		cerr<<Data.cline<<setw(5)<<" | "<<s<<endl;
 		 
 		cerr << Colour::BYellow()<<"INFO:"<<endl;
-		cerr << setw(15) << "LINE: "		<< Data.cline 					<<endl;
-		cerr << setw(15) << "COL: "			<< Data.clinecharacter 			<<endl;			
-		cerr << setw(15) << "FILE: "		<< Data.FileInfo.file 			<<endl;
-		cerr << setw(15) << "PATH: "		<< Data.FileInfo.file_Dir 		<<endl;
-		cerr << setw(15) << "FULL PATH: "	<< Data.FileInfo.fileFullPath 	<<endl;
-		cerr << setw(15) << "g++ VERSION: "	<< MacroData.version 			<<endl;
+		cerr << setw(15) << "LINE: "		<< Data.cline 					<< endl;
+		cerr << setw(15) << "COL: "			<< Data.clinecharacter 			<< endl;			
+		cerr << setw(15) << "FILE: "		<< Data.FileInfo.file 			<< endl;
+		cerr << setw(15) << "PATH: "		<< Data.FileInfo.file_Dir 		<< endl;
+		cerr << setw(15) << "FULL PATH: "	<< Data.FileInfo.fileFullPath 	<< endl;
+		cerr << setw(15) << "g++ VERSION: "	<< MacroData.version 			<< endl;
 
 	}
 	exit(code);
@@ -272,10 +272,12 @@ void EMBERLANG::Lex(){
 
 						// Error checking
 						} else if(Get() == '\0')
-							Exit(1,"SyntaxError:\n\tExpected: \"*\"\n\tRecieved: EOF");
-						else if(Get() == '\n')
+							Exit(1,"SyntaxError:\n\tExpected: \"*/\"\n\tRecieved: EOF");
+						else if(Get() == '\n') {
 							// Checks for newline so the line system isn't messed up
 							Data.cline++;
+							Data.clinecharacter = 0; // Reset current character
+						}
 						Auto_Append();
 						Next();
 					}
@@ -293,7 +295,10 @@ void EMBERLANG::Lex(){
 						Auto_Append();
 						Next();
 						if(Get()=='\0' || Get()=='\n'){
-							if(Get() == '\n') Data.cline++;
+							if(Get() == '\n') {
+								Data.cline++;
+								Data.clinecharacter = 0; // Reset current character
+							}
 							break;
 						}
 					}	
@@ -420,7 +425,7 @@ void EMBERLANG::Lex(){
 			case '\n':
 				Data.start=Data.pos;
 				Data.cline++;
-				Data.clinecharacter=0;
+				Data.clinecharacter = 0; // Reset current character
 				if(!NewlinesCondition()){
 					LoopAgain(i);
 					Next();
@@ -502,6 +507,7 @@ void EMBERLANG::Lex(){
 							switch(Get()){
 								case '\n':
 									Data.cline++;
+									Data.clinecharacter = 0; // Reset current character
 									Manual_Append("\\n");
 									break;
 
@@ -631,6 +637,7 @@ void EMBERLANG::Lex(){
 					switch(Get()){
 						case '\n':
 							Data.cline++;
+							Data.clinecharacter = 0; // Reset current character
 							Manual_Append("\\n");
 							break;
 
