@@ -23,7 +23,7 @@ This project has been tested with:
 * Make version: 4.3 x86_64-pc-linux-gnu
 * g++ version: (Ubuntu 12.1.0-2ubuntu1~22.04) 12.1.0
 
-This is an experimental programming language and is designed with Linux in mind. Don't attempt to port Windows featuers into this without first making a method to specify OS
+This is an experimental programming language and is designed with Linux in mind. Don't attempt to port Windows featuers into this without first making a method to specify OS. Also note that it is specifically designed for Linux so although most Unix platforms will be able to run this don't cry because it doesnt work on Windows. From my experience I cannot compile it for Windows as c++23 isn't supported so you are kind of on your own.
 
 ## Dependancies
 
@@ -33,7 +33,7 @@ See `info/dependancies.md`
 
 See `info/build.md`
 
-## Usage
+## Ember Usage
 
 `/path/to/ember [file] --[options]`
 
