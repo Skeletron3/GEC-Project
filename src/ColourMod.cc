@@ -54,7 +54,7 @@ namespace Colour{
 
 };
 /**
- * @brief For Windows use only
+ * @brief For other non-bash users only use only
  * 
  */
 #else
