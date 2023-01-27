@@ -43,7 +43,7 @@ clean:
 
 install: $(PREFIX)
 
-$(PREFIX): all
+$(PREFIX): $(_LIBS_FULL) $(_BINS_FULL)
 	mkdir -p $@
 	mkdir -p $@/lib
 	mkdir -p $@/bin
@@ -71,3 +71,13 @@ build/dist:
 	cp SECURITY.md $@
 	cp configure $@
 	cp CONTRIBUTING.md $@
+
+pkg: build/pkg
+
+build/pkg: $(_LIBS_FULL) $(_BINS_FULL)
+	mkdir -p build/pkg
+	mkdir -p build/pkg/bin
+	mkdir -p build/pkg/lib
+
+	for FILE in $(_LIBS); do cp build/$$FILE build/pkg/lib/$$FILE; done
+	for FILE in $(_BINS); do cp build/$$FILE build/pkg/bin/$$FILE; done
