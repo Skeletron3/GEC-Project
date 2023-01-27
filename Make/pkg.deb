@@ -1,5 +1,5 @@
 # Main target
-pkg.deb: all build/_PKG_DEB build/_PKG_DEB.deb
+pkg.deb: build/_PKG_DEB build/_PKG_DEB.deb
 
 # Setup file structure ready for making the debian
 build/_PKG_DEB: $(_LIBS_FULL) $(_BINS_FULL)
