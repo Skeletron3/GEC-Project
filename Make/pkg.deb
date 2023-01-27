@@ -1,5 +1,6 @@
 # Main target
 pkg.deb: all build/_PKG_DEB build/_PKG_DEB.deb
+
 # Setup file structure ready for making the debian
 build/_PKG_DEB: $(_LIBS_FULL) $(_BINS_FULL)
 # Make the standard bin , lib , DEBIAN directories required to make the package
