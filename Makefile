@@ -1,4 +1,4 @@
-.PHONY: clean install uninstall debinstall debremove
+.PHONY: clean install uninstall
 
 all: build/ build/ember 
 
