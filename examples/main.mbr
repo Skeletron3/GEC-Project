@@ -1,3 +1,10 @@
+// Ember file
+/*
+ * This is an example Ember file with extension .mbr
+ * Use this as a testing file
+ * Add new features to this file if there are any
+ * Create other files for specific features
+ */
 printf("Hello World\n"); // Prints 'Hello World' + a new line
 printf("Hello World\n"); // Added to show the optimsation
 return(0); // Required to exit
