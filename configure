@@ -22,7 +22,12 @@ fi
 export PREFIX="/usr/local/"
 export CPP_FLAGS="\$(_GOLBAL_CPP_MARCH) --std=c++23 -fPIC -Wall -Wextra -s "
 
+Log() {
+	printf "[LOG] $1\n"
+}
+
 LocateCompiler() {
+	Log "Locating c++ compiler"
 	if [[ $CPP_COMPILER != "" ]]
 	then
 		if [[ ! -f $CPP_COMPILER ]]
@@ -35,33 +40,28 @@ LocateCompiler() {
 		if [[ -f "/usr/bin/c++" ]]
 		then
 			export CPP_COMPILER="/usr/bin/c++"
-
 		elif [[ -f "/usr/local/bin/c++" ]]
 		then
 			export CPP_COMPILER="/usr/local/bin/c++"
-
 		elif [[ -f "/usr/bin/g++-12" ]] # prefer lates compiler if c++ not found
 		then
 			export CPP_COMPILER="/usr/bin/g++-12"
-
 		elif [[ -f "/usr/bin/g++-11" ]]
 		then
 			export CPP_COMPILER="/usr/bin/g++-11"
-
 		elif [[ -f "/usr/bin/g++" ]] # cant find anything defaulting to /usr/bin/g++
 		then
 			export CPP_COMPILER="/usr/bin/g++"	
-
 		elif [[ -f "/usr/local/bin/g++" ]] # cant find anything defaulting to /usr/bin/g++
 		then
 			export CPP_COMPILER="/usr/local/bin/g++"
-
 		else
 			printf "[ERROR] Cannot find g++ compiler\n"
 			printf "[ERROR] Aborting\n"
 			exit 1
 		fi
 	fi
+	Log "Found compiler $CPP_COMPILER"
 }
 
 HandleArgs() {
@@ -111,7 +111,7 @@ HandleArgs() {
 					printf "[ERROR] Aborting\n"
 					exit 1
 				else
-					export BITS="32"
+					export BITS="-m32"
 					export ARCH="i386"
 				fi
 			;;
@@ -122,7 +122,7 @@ HandleArgs() {
 					printf "[ERROR] Aborting\n"
 					exit 1
 				else
-					export BITS="32"
+					export BITS="-m32"
 					export ARCH="amd64"
 				fi				
 			;;
@@ -136,11 +136,6 @@ HandleArgs() {
 			;;
 		esac
 	done
-
-	if [[ $BITS == "32" || $BITS == "64" ]]
-	then
-		export BITS="-m$BITS"
-	fi
 }
 
 GenCFGFile() {
@@ -166,8 +161,8 @@ GenCFGFile() {
 }
 
 main() {
-	HandleArgs "$@"
 	LocateCompiler
+	HandleArgs "$@"
 	GenCFGFile
 }
 
