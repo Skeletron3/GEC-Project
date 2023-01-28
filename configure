@@ -165,7 +165,7 @@ GenCFGFile() {
 GenMakeFile() {
 	Log "Generating Makefile"
 	cp Make/Makefile Makefile
-	gcc -M src/*.cc >> Makefile
+	gcc -MM src/*.cc >> Makefile
 }
 
 main() {
