@@ -65,6 +65,7 @@ LocateCompiler() {
 }
 
 HandleArgs() {
+	Log "Handling args"
 	for i in $@
 	do
 		case $i in 
@@ -139,6 +140,7 @@ HandleArgs() {
 }
 
 GenCFGFile() {
+	Log "Generating .cfg file"
 	> Makefile.cfg
 
 	printf "_CPP = $CPP_COMPILER\n" >> Makefile.cfg
@@ -161,6 +163,7 @@ GenCFGFile() {
 }
 
 GenMakeFile() {
+	Log "Generating Makefile"
 	cp Make/Makefile Makefile
 	gcc -M src/*.cc >> Makefile
 }
