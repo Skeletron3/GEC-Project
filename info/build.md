@@ -12,8 +12,7 @@ The build roughly takes 4 seconds for me so to spped it up using `make -j$(nproc
 
 | Option name | Description |
 | --- | ----------- |
-| `--64` | Compile for 64 bit |
-| `--32` | Compile for 32 bit |
+| `--target` | Set target |
 | `--prefix=<prefix>` | Install directory, defaults to `/usr/local` |
 | `--compiler` | Specify compiler, default to /usr/bin/c++ but will try to find others if not found |
 | `--bash` | Bash coloured output to Ember |
