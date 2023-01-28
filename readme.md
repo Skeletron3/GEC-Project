@@ -25,6 +25,8 @@ This project has been tested with:
 
 This is an experimental programming language and is designed with Linux in mind. Don't attempt to port Windows featuers into this without first making a method to specify OS. Also note that it is specifically designed for Linux so although most Unix platforms will be able to run this don't cry because it doesnt work on Windows. From my experience I cannot compile it for Windows as c++23 isn't supported so you are kind of on your own.
 
+To generate makefile you must run `./configure`
+
 ## Dependancies
 
 See `info/dependancies.md`
