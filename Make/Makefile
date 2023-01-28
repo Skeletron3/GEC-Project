@@ -40,6 +40,7 @@ build/ColourMod.o: src/ColourMod.cc src/Includes/ColourMod.hh
 
 clean:
 	-rm -rf build/*
+	-rm Makefile
 
 install: $(PREFIX)
 
@@ -58,12 +59,14 @@ uninstall:
 dist: build/dist
 
 build/dist:
+	mkdir -p $@
 	mkdir -p $@/src
 
 	cp -r src $@
 	cp -r info $@
 	cp -r info $@
 	cp -r examples $@
+	cp -r Make $@
 
 	cp Makefile $@
 	cp LICENCE.txt $@

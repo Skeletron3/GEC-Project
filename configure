@@ -160,10 +160,16 @@ GenCFGFile() {
 	printf "_BINS_FULL = build/ember\n" >> Makefile.cfg
 }
 
+GenMakeFile() {
+	cp Make/Makefile Makefile
+	gcc -M src/*.cc >> Makefile
+}
+
 main() {
 	LocateCompiler
 	HandleArgs "$@"
 	GenCFGFile
+	GenMakeFile
 }
 
 main "$@"
