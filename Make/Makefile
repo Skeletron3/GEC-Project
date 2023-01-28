@@ -40,7 +40,6 @@ build/ColourMod.o: src/ColourMod.cc src/Includes/ColourMod.hh
 
 clean:
 	-rm -rf build/*
-	-rm Makefile
 
 install: $(PREFIX)
 
