@@ -6,6 +6,8 @@ To install use `make install` (May require sudo)
 
 To build a package use `make pkg.<file extension>`
 
+The build roughly takes 4 seconds for me so to spped it up using `make -j$(nproc)`
+
 ## Options for confifure
 
 | Option name | Description |
