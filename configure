@@ -105,27 +105,26 @@ HandleArgs() {
 					printf "\n"
 				fi
 			;;
-			--32)
-				if [[ $BITS != "" ]]
+			--target=*)
+				tmp="${i:9}"
+				if [[ $tmp == "" ]]
 				then
-					printf "[ERROR] 32/64 bit already specified\n"
+					printf "[ERROR] Target not specified"
 					printf "[ERROR] Aborting\n"
 					exit 1
-				else
-					export BITS="-m32"
-					export ARCH="i386"
-				fi
-			;;
-			--64)
-				if [[ $BITS != "" ]]
+				elif [[ $tmp == "x86_64-pc-linux-gnu" ]]
 				then
-					printf "[ERROR] 32/64 bit already specified\n"
-					printf "[ERROR] Aborting\n"
-					exit 1
-				else
-					export BITS="-m32"
+					export BITS="-m64"
 					export ARCH="amd64"
-				fi				
+				elif [[ $tmp == "i386-pc-linux-gnu" ]]
+				then
+					export BITS="-m64"
+					export ARCH="amd64"
+				else
+					printf "[ERROR] Unrecognised target\n"
+					printf "[ERROR] Aborting\n"
+					exit 1					
+				fi
 			;;
 			--bash)
 				export CPP_FLAGS+="-D__USING_BASH__ "
