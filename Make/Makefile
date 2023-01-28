@@ -44,6 +44,7 @@ clean:
 clean.complete:
 	-rm -rf build/*
 	-rm Makefile
+	-rm Makefile.cfg
 
 install: $(PREFIX)
 
