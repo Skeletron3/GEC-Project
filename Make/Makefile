@@ -41,6 +41,10 @@ build/ColourMod.o: src/ColourMod.cc src/Includes/ColourMod.hh
 clean:
 	-rm -rf build/*
 
+clean.complete:
+	-rm -rf build/*
+	-rm Makefile
+
 install: $(PREFIX)
 
 $(PREFIX): $(_LIBS_FULL) $(_BINS_FULL)
