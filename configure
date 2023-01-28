@@ -108,8 +108,8 @@ HandleArgs() {
 					export ARCH="amd64"
 				elif [[ $tmp == "i386-pc-linux-gnu" ]]
 				then
-					export BITS="-m64"
-					export ARCH="amd64"
+					export BITS="-m32"
+					export ARCH="i486"
 				else
 					printf "[ERROR] Unrecognised target\n"
 					printf "[ERROR] Aborting\n"
