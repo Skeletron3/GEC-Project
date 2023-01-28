@@ -84,3 +84,4 @@ build/pkg: $(_LIBS_FULL) $(_BINS_FULL)
 
 	for FILE in $(_LIBS); do cp build/$$FILE build/pkg/lib/$$FILE; done
 	for FILE in $(_BINS); do cp build/$$FILE build/pkg/bin/$$FILE; done
+
