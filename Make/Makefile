@@ -56,9 +56,9 @@ uninstall:
 	-for FILE in $(_LIBS); do rm $(PREFIX)/lib/$$FILE; done 
 	-for FILE in $(_BINS); do rm $(PREFIX)/bin/$$FILE; done
 
-dist: build/dist
+pkg.src: build/pkg.src
 
-build/dist:
+build/pkg.src:
 	mkdir -p $@
 	mkdir -p $@/src
 
