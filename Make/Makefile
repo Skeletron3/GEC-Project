@@ -23,20 +23,20 @@ build/libEmberCompiler.so: build/Compiler.o
 build/libEmberLexer.so: build/Lexer.o
 	$(_CPP) -shared $(_GLOBAL_CPP_FLAGS) $< -o $@
 
-build/Main.o: src/Main.cc src/Includes/Main.hh
+build/Main.o: src/Main.cc Makefile.cfg
 	$(_CPP) -c $(_GLOBAL_CPP_FLAGS) $< -o $@
 
-build/Lexer.o: src/Lexer.cc src/Includes/Lexer.hh
+build/Lexer.o: src/Lexer.cc Makefile.cfg
 	$(_CPP) -c $(_GLOBAL_CPP_FLAGS) $< -o $@
 
-build/Data.o: src/Data.cc src/Includes/Data.hh
+build/Data.o: src/Data.cc Makefile.cfg
 	$(_CPP) -c $(_GLOBAL_CPP_FLAGS) $< -o $@
 
-build/Compiler.o: src/Compiler.cc src/Includes/Compiler.hh
+build/Compiler.o: src/Compiler.cc Makefile.cfg
 	$(_CPP) -c $(_GLOBAL_CPP_FLAGS) $< -o $@
 
-build/ColourMod.o: src/ColourMod.cc src/Includes/ColourMod.hh
-	$(_CPP) -c $(_GLOBAL_CPP_FLAGS) $<* -o $@
+build/ColourMod.o: src/ColourMod.cc Makefile.cfg
+	$(_CPP) -c $(_GLOBAL_CPP_FLAGS) $< -o $@
 
 clean:
 	-rm -rf build/*
