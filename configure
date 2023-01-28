@@ -1,15 +1,5 @@
 #!/bin/bash
 
-#
-# configure script
-# options:
-#   --64 ) compile for 64 bit
-#   --32 ) compile for 32 bit
-#   --prefix=<prefix> ) install directory
-#   --compiler=<compielr> ) set compiler
-#   --bash ) enables bash colloured output
-#
-
 set -e
 
 if [[ "$(id -u)" == 0 ]]
