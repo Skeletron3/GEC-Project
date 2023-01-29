@@ -10,6 +10,10 @@ GEC is an open source project which groups together many projects such with the 
 
 * UtilityTools - a group of binaries designed to speed everyday tasks
 
+## Contact
+
+`TheDuck#2454`
+
 ## Notes
 
 ALL the source in this repository will be having the licence GNU GPLv3 whether it says so or not :)
