@@ -1,1 +1,3 @@
 Makefile linguist-detectable=false
+*.c linguist-detectable=true
+*.cc linguist-detectable=true
