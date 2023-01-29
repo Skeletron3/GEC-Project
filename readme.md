@@ -9,3 +9,7 @@ GEC is an open source project which groups together many projects such with the 
 * Ember programming language -  a simple compiled programming language
 
 * UtilityTools - a group of binaries designed to speed everyday tasks
+
+## Notes
+
+ALL the source in this repository will be having the licence GNU GPLv3 whether it says so or not :)
