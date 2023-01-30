@@ -3,7 +3,7 @@ _CPP = /usr/bin/c++
 
 .PHONY: clean
 
-all: build_program_cls build_program_simpleshell
+all: build_program_cls
 
 build_program_cls: build/cls build/cls/cls
 
@@ -15,17 +15,6 @@ build/cls/cls: build/cls/main.o
 
 build/cls/main.o: src/cls/main.c
 	$(_CC) -c $< -o $@ -Wall -Wextra -s -O3
-
-build_program_simpleshell: build/simpleshell build/simpleshell/sshell
-
-build/simpleshell:
-	mkdir -p $@
-
-build/simpleshell/sshell: build/simpleshell/main.o
-	$(_CPP) $^ -o $@ -Wall -Wextra -s -O3
-
-build/simpleshell/main.o: src/simpleshell/main.cc
-	$(_CPP) -c $< -o $@ -Wall -Wextra -s -O3
 
 clean:
 	rm -rf build

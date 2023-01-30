@@ -17,7 +17,7 @@ int main(int argc , char** argv) {
 	std::string _HOST = hostname;
 
 	while(1) {
-		std::cout << _USER << "@" << _HOST << ">> ";
+		std::cout << _USER << "@" << _HOST << " >> ";
 		getline(std::cin , buffer); // gets all of cin in a string
 
     	if (std::cin.eof()) {// checks for EOF removing this will cause an infinte loop on EOF
