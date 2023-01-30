@@ -10,6 +10,8 @@ GEC is an open source project which groups together many projects such with the 
 
 * UtilityTools - a group of binaries designed to speed everyday tasks
 
+* SShell a simple shell that can have a common prefix for subcommands
+
 ## Contact
 
 `TheDuck#2454`
