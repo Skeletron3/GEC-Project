@@ -119,10 +119,17 @@ HandleArgs() {
 			--bash)
 				export CPP_FLAGS+="-D__USING_BASH__ "
 			;;
+			--add-makefile)
+			GenMakeFile
+			;;
+			--add-config)
+			GenCFGFile
+			;;
 			*)
 				printf "[ERROR] Command not found '$i'\n"
 				printf "[ERROR] Aborting\n"
 				exit 1
+
 			;;
 		esac
 	done
@@ -160,8 +167,6 @@ GenMakeFile() {
 main() {
 	HandleArgs "$@"
 	LocateCompiler
-	GenCFGFile
-	GenMakeFile
 }
 
 main "$@"
