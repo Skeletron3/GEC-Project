@@ -1,6 +1,6 @@
 .PHONY: clean install uninstall
 
-all: build/ build/ember 
+all: build build/ember 
 
 Makefile.cfg:
 	$(error Makefile.cfg not setup please run ./configure)
@@ -8,7 +8,7 @@ Makefile.cfg:
 include Makefile.cfg
 include Make/pkg.deb
 
-build/:
+build:
 	mkdir -p build
 
 build/ember: build/Main.o build/libEmberLexer.so build/libEmberCompiler.so build/libEmberCore.so
