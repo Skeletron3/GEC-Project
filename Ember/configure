@@ -124,6 +124,10 @@ HandleArgs() {
 			GenMakeFile
 			;;
 			
+			--find-compiler)
+			LocateCompiler
+			;;
+
 			--add-config)
 			GenCFGFile
 			;;
@@ -168,7 +172,6 @@ GenMakeFile() {
 
 main() {
 	HandleArgs "$@"
-	LocateCompiler
 }
 
 main "$@"
