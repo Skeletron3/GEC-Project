@@ -10,7 +10,7 @@ then
 fi
 
 export PREFIX="/usr/local/"
-export CPP_FLAGS="\$(_GOLBAL_CPP_MARCH) --std=c++23 -fPIC -Wall -Wextra -s "
+export CPP_FLAGS="\$(_GOLBAL_CPP_MARCH) -fPIC -Wall -Wextra -s "
 
 Log() {
 	printf "[LOG] $1\n"

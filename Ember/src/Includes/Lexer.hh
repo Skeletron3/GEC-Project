@@ -152,16 +152,6 @@ class EMBERLANG {
 				 * 
 				 */
 				string file;
-				/**
-				 * @brief Parent directory of file
-				 * 
-				 */
-				string file_Dir;
-				/**
-				 * @brief Full path of file
-				 * 
-				 */
-				string fileFullPath;
 			}FileInfo;
 
 		}Data;

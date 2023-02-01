@@ -28,8 +28,6 @@ EMBERLANG::EMBERLANG(int IN_argc,char** IN_argv,string IN_code,string FileName){
 	Data.InputArgInfo.argv = IN_argv;
 	Data.InputArgInfo.argc = IN_argc;
 	Data.FileInfo.file = FileName;
-	Data.FileInfo.file_Dir = std::filesystem::current_path();
-	Data.FileInfo.fileFullPath = Data.FileInfo.file_Dir+"/"+Data.FileInfo.file;
 }
 
 void EMBERLANG::init(int IN_argc,char** IN_argv,string IN_code,string FileName){
@@ -37,8 +35,6 @@ void EMBERLANG::init(int IN_argc,char** IN_argv,string IN_code,string FileName){
 	Data.InputArgInfo.argv = IN_argv;
 	Data.InputArgInfo.argc = IN_argc;
 	Data.FileInfo.file = FileName;
-	Data.FileInfo.file_Dir = std::filesystem::current_path();
-	Data.FileInfo.fileFullPath = Data.FileInfo.file_Dir+"/"+Data.FileInfo.file;
 }
 
 EMBERLANG::~EMBERLANG(){}
@@ -137,8 +133,6 @@ void EMBERLANG::Exit(int code,string details1){
 		cerr << setw(15) << "LINE: "		<< Data.cline 					<< endl;
 		cerr << setw(15) << "COL: "			<< Data.clinecharacter 			<< endl;			
 		cerr << setw(15) << "FILE: "		<< Data.FileInfo.file 			<< endl;
-		cerr << setw(15) << "PATH: "		<< Data.FileInfo.file_Dir 		<< endl;
-		cerr << setw(15) << "FULL PATH: "	<< Data.FileInfo.fileFullPath 	<< endl;
 		cerr << setw(15) << "g++ VERSION: "	<< MacroData.version 			<< endl;
 
 	}
