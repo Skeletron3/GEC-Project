@@ -79,7 +79,7 @@ build/pkg.src:
 	cp configure $@
 	cp CONTRIBUTING.md $@
 
-pkg: build/pkg
+pkg: build build/pkg
 
 build/pkg: $(_LIBS_FULL) $(_BINS_FULL)
 	mkdir -p build/pkg
@@ -89,12 +89,12 @@ build/pkg: $(_LIBS_FULL) $(_BINS_FULL)
 	for FILE in $(_LIBS); do cp build/$$FILE build/pkg/lib/$$FILE; done
 	for FILE in $(_BINS); do cp build/$$FILE build/pkg/bin/$$FILE; done
 
-exe: build/ember.bin
+exe: build build/ember.bin
 	
 build/ember.bin: build/Lexer.o build/Compiler.o build/Data.o build/ColourMod.o build/Main.o
 	$(_CPP) $^ -o $@
 
-exe.static: build/ember.static.bin
+exe.static: build build/ember.static.bin
 
 build/ember.static.bin: build/Lexer.o build/Compiler.o build/Data.o build/ColourMod.o build/Main.o
 	$(_CPP) -static $^ -o $@
