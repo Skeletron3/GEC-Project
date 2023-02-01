@@ -89,10 +89,14 @@ build/pkg: $(_LIBS_FULL) $(_BINS_FULL)
 	for FILE in $(_LIBS); do cp build/$$FILE build/pkg/lib/$$FILE; done
 	for FILE in $(_BINS); do cp build/$$FILE build/pkg/bin/$$FILE; done
 
-static: build/ember_static
+exe: build/ember.bin
 	
-build/ember_static: build/Lexer.o build/Compiler.o build/Data.o build/ColourMod.o build/Main.o
+build/ember.bin: build/Lexer.o build/Compiler.o build/Data.o build/ColourMod.o build/Main.o
 	$(_CPP) $^ -o $@
 
+exe.static: build/ember.static.bin
+
+build/ember.static.bin: build/Lexer.o build/Compiler.o build/Data.o build/ColourMod.o build/Main.o
+	$(_CPP) $^ -o $@
 
 # DANGER ZONE LEAVE DO NOT REMOVE
