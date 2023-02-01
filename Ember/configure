@@ -158,8 +158,8 @@ GenMakeFile() {
 }
 
 main() {
-	LocateCompiler
 	HandleArgs "$@"
+	LocateCompiler
 	GenCFGFile
 	GenMakeFile
 }
