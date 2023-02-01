@@ -1,8 +1,8 @@
 ./configure \
-	--prefix=/usr/local/ \
-	--compiler=/usr/bin/g++ \
-	--target=x86_64-pc-linux-gnu \
-	--bash \
-	--version=1.0-1
-	--add-makefile \
-	--add-config
+--prefix=/usr/local/ \
+--compiler=/usr/bin/g++ \
+--target=x86_64-pc-linux-gnu \
+--bash \
+--version=1.0-1 \
+--add-makefile \
+--add-config

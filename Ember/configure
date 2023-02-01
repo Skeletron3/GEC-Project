@@ -119,9 +119,11 @@ HandleArgs() {
 			--bash)
 				export CPP_FLAGS+="-D__USING_BASH__ "
 			;;
+
 			--add-makefile)
 			GenMakeFile
 			;;
+			
 			--add-config)
 			GenCFGFile
 			;;
