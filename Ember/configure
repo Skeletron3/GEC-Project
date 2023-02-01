@@ -173,8 +173,8 @@ build/libEmberCore.so \
 
 GenMakeFile() {
 	Log "Generating Makefile"
+	cat Make/Data/Makefile > Makefile
 	gcc -M src/*.cc >> Makefile
-	cat Make/Data/Makefile >> Makefile
 }
 
 main() {
