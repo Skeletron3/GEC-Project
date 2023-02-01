@@ -39,10 +39,10 @@ build/ColourMod.o: src/ColourMod.cc Makefile.cfg
 	$(_CPP) -c $(_GLOBAL_CPP_FLAGS) $< -o $@
 
 clean:
-	-rm -rf build/*
+	-rm -rf build
 
 clean.complete:
-	-rm -rf build/*
+	-rm -rf build
 	-rm Makefile
 	-rm Makefile.cfg
 
