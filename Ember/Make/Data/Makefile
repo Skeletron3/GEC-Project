@@ -97,6 +97,6 @@ build/ember.bin: build/Lexer.o build/Compiler.o build/Data.o build/ColourMod.o b
 exe.static: build/ember.static.bin
 
 build/ember.static.bin: build/Lexer.o build/Compiler.o build/Data.o build/ColourMod.o build/Main.o
-	$(_CPP) $^ -o $@
+	$(_CPP) -static $^ -o $@
 
 # DANGER ZONE LEAVE DO NOT REMOVE
