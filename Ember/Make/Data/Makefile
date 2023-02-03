@@ -2,9 +2,6 @@
 
 all: build build/ember 
 
-Makefile.cfg:
-	$(error Makefile.cfg not setup please run ./configure)
-
 include Makefile.cfg
 include Make/pkg.deb
 
@@ -85,12 +82,12 @@ build/pkg: $(_LIBS_FULL) $(_BINS_FULL)
 
 exe: build build/ember.bin
 	
-build/ember.bin: build/Lexer.o build/Data.o build/ColourMod.o build/Main.o
+build/ember.bin: $(_OBJECTS_FULL)
 	$(_CPP) $^ -o $@
 
 exe.static: build build/ember.static.bin
 
-build/ember.static.bin: build/Lexer.o build/Data.o build/ColourMod.o build/Main.o
+build/ember.static.bin: $(_OBJECTS_FULL)
 	$(_CPP) -static $^ -o $@
 
 # DANGER ZONE LEAVE DO NOT REMOVE
