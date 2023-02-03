@@ -11,14 +11,11 @@ include Make/pkg.deb
 build:
 	mkdir -p build
 
-build/ember: build/Main.o build/libEmberLexer.so build/libEmberCompiler.so build/libEmberCore.so
-	$(_CPP) $(_GLOBAL_CPP_FLAGS) build/Main.o -Lbuild/ -lEmberLexer -lEmberCompiler -lEmberCore -o $@
+build/ember: build/Main.o build/libEmberLexer.so build/libEmberCore.so
+	$(_CPP) $(_GLOBAL_CPP_FLAGS) build/Main.o -Lbuild/ -lEmberLexer -lEmberCore -o $@
 
 build/libEmberCore.so: build/Data.o build/ColourMod.o
 	$(_CPP) -shared $(_GLOBAL_CPP_FLAGS) $^ -o $@
-
-build/libEmberCompiler.so: build/Compiler.o
-	$(_CPP) -shared $(_GLOBAL_CPP_FLAGS) $< -o $@
 
 build/libEmberLexer.so: build/Lexer.o
 	$(_CPP) -shared $(_GLOBAL_CPP_FLAGS) $< -o $@
@@ -30,9 +27,6 @@ build/Lexer.o: src/Lexer.cc Makefile.cfg
 	$(_CPP) -c $(_GLOBAL_CPP_FLAGS) $< -o $@
 
 build/Data.o: src/Data.cc Makefile.cfg
-	$(_CPP) -c $(_GLOBAL_CPP_FLAGS) $< -o $@
-
-build/Compiler.o: src/Compiler.cc Makefile.cfg
 	$(_CPP) -c $(_GLOBAL_CPP_FLAGS) $< -o $@
 
 build/ColourMod.o: src/ColourMod.cc Makefile.cfg
@@ -91,12 +85,12 @@ build/pkg: $(_LIBS_FULL) $(_BINS_FULL)
 
 exe: build build/ember.bin
 	
-build/ember.bin: build/Lexer.o build/Compiler.o build/Data.o build/ColourMod.o build/Main.o
+build/ember.bin: build/Lexer.o build/Data.o build/ColourMod.o build/Main.o
 	$(_CPP) $^ -o $@
 
 exe.static: build build/ember.static.bin
 
-build/ember.static.bin: build/Lexer.o build/Compiler.o build/Data.o build/ColourMod.o build/Main.o
+build/ember.static.bin: build/Lexer.o build/Data.o build/ColourMod.o build/Main.o
 	$(_CPP) -static $^ -o $@
 
 # DANGER ZONE LEAVE DO NOT REMOVE

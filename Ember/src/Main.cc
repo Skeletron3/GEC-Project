@@ -38,9 +38,7 @@ int main(int argc,char** argv){
 	// Handle all arguements
 	for(int i = 1; i < argc; i++) {
 		tmp = (string) argv[i];
-		if(tmp == "-K"){
-			DeleteASFile = false;
-		} else if(tmp == "-o") {
+		 if(tmp == "-o") {
 			if(OutFileName != "ember.out") PreLexExit(6,"Cannot specify more than 1 output file"); 
 			if((argc - i) == 1) PreLexExit(6,"Missing output file name");
 			OutFileName = (string) argv[i+1];
@@ -70,25 +68,9 @@ int main(int argc,char** argv){
 
 	// Load objects
 	EMBERLANG Ember(argc, argv, FileContents, FileName);
-	COMPILER Compiler;
-	GASCOMPILED Gas;
-
-	std::ofstream MyFile("Ember.Build.s");
-
 	while(Ember.IsNotEOF()){
-		Compiler.Handle_identifiers(Ember,Gas);
+
 	}
 
-	// Write the GNU AS compiled into file
-	MyFile << "\t.global main" << endl << "\t.text" << endl << "main:" << endl;
-	MyFile << Gas.SectionMain << endl;
-	MyFile << Gas.SectionMainLast << endl;
-
-	int x = 0;
-	x += system(("gcc Ember.Build.s -o " + OutFileName).c_str());
-
-	if(DeleteASFile == true) // remove assembly file unless specified not to
-		x += system("rm Ember.Build.s");	
- 
 	return 0; 
 }

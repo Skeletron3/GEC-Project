@@ -70,8 +70,4 @@ void PreLexExit(int Code, string details) {
 	}
 }
 
-string GASCOMPILED::SectionMain="";
-string GASCOMPILED::SectionMainLast="";
-int GASCOMPILED::Counter = 1;
-
 std::unordered_map<int, string> MBR_MSGES = {};

@@ -158,15 +158,14 @@ GenCFGFile() {
 	fi
 	
 	printf "PREFIX = $PREFIX\n" >> Makefile.cfg
-	printf "_LIBS = libEmberLexer.so libEmberCompiler.so libEmberCore.so\n" >> Makefile.cfg
-	printf "_LIBS_FULL = build/libEmberLexer.so build/libEmberCompiler.so build/libEmberCore.so\n" >> Makefile.cfg
+	printf "_LIBS = libEmberLexer.so libEmberCore.so\n" >> Makefile.cfg
+	printf "_LIBS_FULL = build/libEmberLexer.so build/libEmberCore.so\n" >> Makefile.cfg
 	printf "_BINS = ember\n" >> Makefile.cfg
 	printf "_BINS_FULL = build/ember\n" >> Makefile.cfg
 	printf "\
 _OBJECTS_FULL = \
 build/Main.o \
 build/libEmberLexer.so \
-build/libEmberCompiler.so \
 build/libEmberCore.so \
 	" >> Makefile.cfg
 }

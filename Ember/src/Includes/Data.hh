@@ -49,14 +49,6 @@ extern "C" string ExitCodes[GLOBAL_ARRAY_SIZE];
  */
 void PreLexExit(int Code, string details);
 
-// GNU assembly compiled text
-class GASCOMPILED {
-	public:
-	static string SectionMain;
-	static string SectionMainLast;
-	static int Counter;
-};
-
 // Optimsation to msg and then ending of it
 extern "C" std::unordered_map<int, string> MBR_MSGES;
 

@@ -31,7 +31,6 @@
 #include "Common.hh"
 #include "ColourMod.hh"
 #include "Data.hh"
-#include "Compiler.hh"
 
 #include <streambuf>
 #include <fstream>
