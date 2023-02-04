@@ -1,0 +1,46 @@
+#!/bin/bash
+
+HandleArgs() {
+	for i in $@
+	do
+		case $i in
+			--dest=* | --destination=* | -d=*)
+			if [[ $i == --dest=* ]]
+			then
+				export _destination="${i:7}"
+			elif [[ $i == --destination=* ]]
+			then
+				export _destination="${i:14}"
+			elif [[ $i == \-d=* ]]
+			then
+				export _destination="${i:3}"
+			fi
+			if [[ ! -d $_destination ]]
+			then
+				printf "[ERROR] Destination is not a directory\n"
+				printf "[ERROR] Aborted\n"
+				exit 1
+			fi
+			;;
+		esac
+	done
+
+}
+
+Uninstall() {
+	rm $_destination/bin/ember
+	rm $_destination/lib/libEmber*.so
+	printf "[WARNING] The folders '$_destination/lib' and '$_destination/bin' and '$_destination' have been left untouched as \
+this script cannot tell if it has created it\nIf this script created it then you can safely delete those folders\n"
+}
+
+main() {
+	HandleArgs "$@"
+	if [[ $_destination == "" ]]
+	then
+		printf "[ERROR] Destination not specified\n"
+		printf "[ERROR] Aborting\n"
+	fi
+	Uninstall
+}
+main "$@"

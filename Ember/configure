@@ -8,8 +8,6 @@ then
 	printf "[ERROR] Aborting\n"
 	exit 1
 fi
-
-export PREFIX="/usr/local/"
 export CPP_FLAGS="\$(_GOLBAL_CPP_MARCH) -fPIC -Wall -Wextra -s -fsanitize=undefined,address "
 
 Log() {
@@ -59,22 +57,6 @@ HandleArgs() {
 	for i in $@
 	do
 		case $i in 
-			--prefix=*)
-				export PREFIX="${i:9}"
-				if [[ $PREFIX == "" ]]
-				then
-					printf "[WARNING] Defaulting to '/usr/local' because nothing was provided\n"
-					printf "[WARNING] Ignoring\n"
-					printf "[WARNIGN] Bad arguement\n"
-					printf "\n"
-					export PREFIX="/usr/local"
-				elif [[ ! -d $PREFIX ]]
-				then
-					printf "[ERROR] Prefix not found\n"
-					printf "[ERROR] Aborting\n"
-					exit 1
-				fi
-			;;
 			--compiler=*)
 				export CPP_COMPILER="${i:11}"
 				if [[ $CPP_COMPILER == "" ]]
@@ -157,7 +139,6 @@ GenCFGFile() {
 		printf "_GLOBAL_CPP_FLAGS = $CPP_FLAGS\n" >> Makefile.cfg
 	fi
 	
-	printf "PREFIX = $PREFIX\n" >> Makefile.cfg
 	printf "_LIBS = libEmberLexer.so libEmberCore.so\n" >> Makefile.cfg
 	printf "_LIBS_FULL = build/libEmberLexer.so build/libEmberCore.so\n" >> Makefile.cfg
 	printf "_BINS = ember\n" >> Makefile.cfg

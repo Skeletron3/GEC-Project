@@ -1,0 +1,53 @@
+#!/bin/bash
+
+export _destination="/usr/local"
+
+HandleArgs() {
+	for i in $@
+	do
+		case $i in
+			--dest=* | --destination=* | -d=*)
+			if [[ $i == --dest=* ]]
+			then
+				export _destination="${i:7}"
+			elif [[ $i == --destination=* ]]
+			then
+				export _destination="${i:14}"
+			elif [[ $i == \-d=* ]]
+			then
+				export _destination="${i:3}"
+			fi
+			if [[ ! -d $_destination ]]
+			then
+				printf "[ERROR] Destination is not a directory\n"
+				printf "[ERROR] Aborted\n"
+				exit 1
+			fi
+			;;
+		esac
+	done
+
+}
+Check() {
+	if [[ ! -d build ]]
+	then
+		printf "[ERROR] Ember needs to be built\n"
+		printf "[ERROR] Aborted\n"
+		exit 1
+	fi
+}
+
+Install() { # only for pkg with bins and libs
+	mkdir -p $_destination/bin
+	mkdir -p $_destination/lib
+	cp build/lib* $_destination/lib
+	cp build/ember $_destination/bin
+}
+
+main() {
+	HandleArgs "$@"
+	Check
+	Install
+}
+
+main "$@"
