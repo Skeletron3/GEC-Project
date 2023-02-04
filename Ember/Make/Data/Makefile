@@ -36,6 +36,8 @@ clean.complete:
 	-rm -rf build
 	-rm Makefile
 	-rm Makefile.cfg
+	-rm install
+	-rm uninstall
 
 pkg.src: build/pkg.src
 
