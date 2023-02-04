@@ -9,7 +9,7 @@ build:
 	mkdir -p build
 
 build/ember: build/Main.o build/libEmberLexer.so build/libEmberCore.so
-	$(_CPP) $(_GLOBAL_CPP_FLAGS) build/Main.o -Lbuild/ -lEmberLexer -lEmberCore -o $@
+	$(_CPP) $(_GLOBAL_CPP_FLAGS) build/Main.o -Lbuild/ -lEmberLexer -lEmberCore -o $@ $(_RPATH)
 
 build/libEmberCore.so: build/Data.o build/ColourMod.o
 	$(_CPP) -shared $(_GLOBAL_CPP_FLAGS) $^ -o $@
