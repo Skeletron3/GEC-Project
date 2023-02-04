@@ -113,14 +113,20 @@ HandleArgs() {
 			--add-config)
 			GenCFGFile
 			;;
+			--add-scripts)
+				AddScripts
+			;;
 			*)
 				printf "[ERROR] Command not found '$i'\n"
 				printf "[ERROR] Aborting\n"
 				exit 1
-
 			;;
 		esac
 	done
+}
+AddScripts() {
+	cp Make/Data/install ./
+	cp Make/Data/uninstall ./
 }
 
 GenCFGFile() {

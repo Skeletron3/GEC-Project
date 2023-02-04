@@ -18,4 +18,5 @@ The build roughly takes 4 seconds for me so to spped it up using `make -j$(nproc
 | `--bash` | Bash coloured output to Ember |
 | `--add-makefile` | Adds the Makefile - useful for only updating Makefile |
 | `--add-config` | Adds the Makefile - useful for only updating cfg |
+| `--add-scripts` | Adds the scripts for install/uninstall|
 | `--find-compiler` | Automatically finds the compiler |
