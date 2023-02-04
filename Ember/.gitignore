@@ -1,5 +1,7 @@
 /build
 /Makefile
+/install
+/uninstall
 
 **.s
 **.o
