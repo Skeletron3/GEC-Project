@@ -37,20 +37,6 @@ clean.complete:
 	-rm Makefile
 	-rm Makefile.cfg
 
-install: $(PREFIX)
-
-$(PREFIX): $(_LIBS_FULL) $(_BINS_FULL)
-	mkdir -p $@
-	mkdir -p $@/lib
-	mkdir -p $@/bin
-
-	for FILE in $(_LIBS); do cp build/$$FILE $(PREFIX)/lib/$$FILE; done
-	for FILE in $(_BINS); do cp build/$$FILE $(PREFIX)/bin/$$FILE; done
-
-uninstall:
-	-for FILE in $(_LIBS); do rm $(PREFIX)/lib/$$FILE; done 
-	-for FILE in $(_BINS); do rm $(PREFIX)/bin/$$FILE; done
-
 pkg.src: build/pkg.src
 
 build/pkg.src:
